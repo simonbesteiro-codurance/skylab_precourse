@@ -172,16 +172,16 @@ function userRole() {
 }
 //buy flight by id
 function buyFlight() {
-    var buyChecker=true;
+    var buyChecker = true;
 
     while (buyChecker) {
-        var electionBuy=prompt("Insert the desired flight ID which you want to buy");
+        var electionBuy = prompt("Insert the desired flight ID which you want to buy");
 
-        if (flights.length>=parseInt(electionBuy)) {
-            buyChecker=false;
+        if (flights.length >= parseInt(electionBuy)) {
+            buyChecker = false;
             alert("Thanks for your buy, we hope see you soon. Good flight!");
         }
-        else{
+        else {
             alert("Please introduce a valid ID");
         }
 
@@ -224,14 +224,13 @@ function searchFlight(searchFlightOperator) {
         for (var i = 0; i < flights.length; i++) {
             if (flights[i].cost == desiredPrice) {
                 foundId = true;
-
-                //REVISAR todos los vuelos slen con no escalas
+                var scale = "";
                 if (flights[i].scale == false) {
                     scale = " and has no scales.";
                 }
-            else {
+                else {
                     count++;
-            }
+                }
                 average += flights[i].cost;
                 console.log("The flight with ID " + i + " from " + flights[i].from + " and destiny " + flights[i].to + " has a cost of " + flights[i].cost + "€" + scale + "\n");
             }
@@ -243,25 +242,42 @@ function searchFlight(searchFlightOperator) {
     //hace una copa del array y checkea borra de la copia  el resultante mas alto en este caso
     // no deberiamos preocuparnos de el mismo ya que tiene que se mallor para que se cuente y despues ya no estarta en la lista
     //hacer un dibujo par ver la logica no vendria mal
-    //animo
+    //animo00
     //testgit
     else if (searchFlightOperator == "<") {
-        var flightCopy= flights;
-        var searchCehcker;    
-        for (let i = 0; i < flights.length; i++) {
-            searchCehcker=false;
-            for (let j = 0; j < flightsCopy.length; j++) {
-            if (flight[i]) {
-                
+        var flightsCopy = flights;
+        var searchChecker;
+        while (flightsCopy.length > 0) {
+            if (flightsCopy.length == 1) {
+                console.log("The flight with ID " + flightsCopy[0].id + " from " + flightsCopy[0].from + " and destiny " + flightsCopy[0].to + " has a cost of " + flightsCopy[0].cost + "€" + scale + "\n");
+                flightsCopy.splice(0, 1);
             }
-                
-            }                        
+            else {
+                for (let i = 0; i < flightsCopy.length; i++) {
+                    searchChecker = true;
+                    for (let j = 0; j < flightsCopy.length; j++) {
+                        if (flightsCopy[j].cost > flightsCopy[i].cost) {
+                            searchChecker = false;
+                        }
+                        debugger;
+                    }
+                    if (searchChecker) {
+                        var scale = "";
+                        if (flightsCopy[i].scale == false) {
+                            scale = " and has no scales.";
+                        }
+                        console.log("The flight with ID " +  flightsCopy[i].id + " from " + flightsCopy[i].from + " and destiny " + flightsCopy[i].to + " has a cost of " + flightsCopy[i].cost + "€" + scale + "\n");
+                        flightsCopy.splice(i, 1);
+                    }
+                }
+
+            }
         }
 
     }
     else {
         console.log('VALOR MAS BAJO:');
-        var flightCopy= flights;
+        var flightsCopy = flights;
         for (var i = 0; i > flightsCopy.length; i++) {
             if (flightsCopy[i].cost > search) {
                 if (flightsCopy[i].scale) {
