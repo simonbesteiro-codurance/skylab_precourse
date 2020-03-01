@@ -244,6 +244,7 @@ function searchFlight(searchFlightOperator) {
     // no deberiamos preocuparnos de el mismo ya que tiene que se mallor para que se cuente y despues ya no estarta en la lista
     //hacer un dibujo par ver la logica no vendria mal
     //animo
+    //testgit
     else if (searchFlightOperator == "<") {
         var flightCopy= flights;
         var searchCehcker;    
