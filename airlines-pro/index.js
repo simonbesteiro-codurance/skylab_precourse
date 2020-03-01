@@ -108,7 +108,6 @@ function addFlight() {
         var scaleFlight
         function scaleFlightCheck() {
             scaleFlight = prompt("Does have scales? yes/no").toUpperCase();
-            debugger;
             while (!scaleFlight) {
                 alert("Please introduce a proper value")
                 scaleFlight = prompt("Does have scales?").toUpperCase();
@@ -288,7 +287,6 @@ function searchFlight(searchFlightOperator) {
                         if (flightsCopy[j].cost < flightsCopy[i].cost) {
                             searchChecker = false;
                         }
-                        debugger;
                     }
                     if (searchChecker) {
                         var scale = "";
