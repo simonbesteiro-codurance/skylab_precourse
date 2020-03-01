@@ -214,6 +214,7 @@ function conditionSearchFlight() {
 }
 //uses the operator sent by the user
 function searchFlight(searchFlightOperator) {
+    //search the equal cost
     if (searchFlightOperator == "=") {
         var desiredPrice;
         while (!desiredPrice) {
@@ -239,11 +240,7 @@ function searchFlight(searchFlightOperator) {
             console.log("no flight found with this price");
         }
     }
-    //hace una copa del array y checkea borra de la copia  el resultante mas alto en este caso
-    // no deberiamos preocuparnos de el mismo ya que tiene que se mallor para que se cuente y despues ya no estarta en la lista
-    //hacer un dibujo par ver la logica no vendria mal
-    //animo00
-    //testgit
+    //sort the flights by higuer price
     else if (searchFlightOperator == "<") {
         var flightsCopy = flights;
         var searchChecker;
@@ -275,32 +272,36 @@ function searchFlight(searchFlightOperator) {
         }
 
     }
+    //sort flight by lower price
     else {
-        console.log('VALOR MAS BAJO:');
         var flightsCopy = flights;
-        for (var i = 0; i > flightsCopy.length; i++) {
-            if (flightsCopy[i].cost > search) {
-                if (flightsCopy[i].scale) {
-                    console.log(flightsCopy[i].id + ' : El vuelo con origen: ' + flightsCopy[i].from + ' y con destino: ' + flightsCopy[i].to + ' tiene un coste de ' + flightsCopy[i].cost + '€, y efectua escala\n');
-                } else {
-                    console.log(flightsCopy[i].id + ' : El vuelo con origen: ' + flightsCopy[i].from + ' y con destino: ' + flightsCopy[i].to + ' tiene un coste de ' + flightsCopy[i].cost + '€, y no efectua escala\n');
-                };
-
-            };
-        }
-
-        //count the array output so all values appears
-        /*var countArray=0;
-        var checkerArray=true;
-        for (let i = 0; i < flights.length; i++) {
-            for (let j = 0; j < flights.length; j++) {
-                if ((flights[i] searchFlightOperator flights[j])==false) {
-                    checkerArray=false;
-                }
-                
+        var searchChecker;
+        while (flightsCopy.length > 0) {
+            if (flightsCopy.length == 1) {
+                console.log("The flight with ID " + flightsCopy[0].id + " from " + flightsCopy[0].from + " and destiny " + flightsCopy[0].to + " has a cost of " + flightsCopy[0].cost + "€" + scale + "\n");
+                flightsCopy.splice(0, 1);
             }
-            
-        }*/
+            else {
+                for (let i = 0; i < flightsCopy.length; i++) {
+                    searchChecker = true;
+                    for (let j = 0; j < flightsCopy.length; j++) {
+                        if (flightsCopy[j].cost < flightsCopy[i].cost) {
+                            searchChecker = false;
+                        }
+                        debugger;
+                    }
+                    if (searchChecker) {
+                        var scale = "";
+                        if (flightsCopy[i].scale == false) {
+                            scale = " and has no scales.";
+                        }
+                        console.log("The flight with ID " +  flightsCopy[i].id + " from " + flightsCopy[i].from + " and destiny " + flightsCopy[i].to + " has a cost of " + flightsCopy[i].cost + "€" + scale + "\n");
+                        flightsCopy.splice(i, 1);
+                    }
+                }
+
+            }
+        }
     }
 }
 
