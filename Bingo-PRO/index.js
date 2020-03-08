@@ -41,23 +41,39 @@ var bingoCard = [
 
 //shows the given array
 function showArray(desiredArray) {
+    //FALTA controlar la linea!
     var count=0
+    var linea=false;
     var outArray="";
     var lineCounter=0;
     for (let i = 0; i < desiredArray.length; i++) {
-        if (desiredArray[i].number=="X") {
+        count++;
+        if (desiredArray[i].matched==true) {
             lineCounter++;
         }
-        outArray+=desiredArray[i].number+" ";
+        if (lineCounter==5) {
+            if (linea==false) {
+                console.log("LINEA!");
+                linea=true;
+            }            
+        }
+        if (count==5) {
+            count=0;
+            lineCounter=0;
+            outArray+=desiredArray[i].number+"\n";
+        }
+        else{
+            outArray+=desiredArray[i].number+" ";
+        }
+        
     }
-    if (lineCounter==5) {
-        console.log("LINEA!");
-    }
+    
     console.log(outArray);
 }
 //ask the user if he wants to continue the game
 function askTurn() {
-    var question=prompt("Do you want with the next turn?\nYes\nNo").toUpperCase();
+    //var question=prompt("Do you want with the next turn?\nYes\nNo").toUpperCase();
+    question="YES";
     switch (question) {
         case "YES":
             return true;
@@ -70,8 +86,20 @@ function askTurn() {
     return question;
 }
 //generates a random number
-function randomNumber() {
-    return Math.floor((Math.random() * 5) + 1);
+function randomNumber(repeatCheck) {
+    
+    var randomCheck =true;
+    while (randomCheck) {
+        randomCheck=false;
+        var randomNumb = Math.floor((Math.random() * 100) + 1);
+        for (let i = 0; i < repeatCheck.length; i++) {
+            if (randomNumb==repeatCheck[i]) {
+                randomCheck=true;
+            }
+        }
+    }    
+    repeatCheck.push(randomNumb);
+    return randomNumb;
 }
 //check if all fields has an "X"on them
 function gameOverCheck(desiredArray) {
@@ -81,7 +109,7 @@ function gameOverCheck(desiredArray) {
             gameOverCounter++;
         }
     }
-    if (gameOverCounter==5) {
+    if (gameOverCounter==15) {
         return true;
     }
 }
@@ -109,37 +137,37 @@ function bingo() {
     while(!user){
     user=prompt("Welcome please insert your name");
     }
+    var repeatCheck=[]
     var bingoCard = [
-        //FAlta controlar que no se repitan los numeros al crear el carton y que ese controlador se resetee
-        //antes de salir el bombo para que los numeros del carton se incluyan
-        { number: randomNumber(), matched: false },
-        { number: randomNumber(), matched: false },
-        { number: randomNumber(), matched: false },
-        { number: randomNumber(), matched: false },
-        { number: randomNumber(), matched: false },
+        { number:randomNumber(repeatCheck), matched: false },
+        { number:randomNumber(repeatCheck), matched: false },
+        { number:randomNumber(repeatCheck), matched: false },
+        { number:randomNumber(repeatCheck), matched: false },
+        { number:randomNumber(repeatCheck), matched: false },
         //next line
-        { number: randomNumber(), matched: false },
-        { number: randomNumber(), matched: false },
-        { number: randomNumber(), matched: false },
-        { number: randomNumber(), matched: false },
-        { number: randomNumber(), matched: false },
+        { number:randomNumber(repeatCheck), matched: false },
+        { number:randomNumber(repeatCheck), matched: false },
+        { number:randomNumber(repeatCheck), matched: false },
+        { number:randomNumber(repeatCheck), matched: false },
+        { number:randomNumber(repeatCheck), matched: false },
         //next line
-        { number: randomNumber(), matched: false },
-        { number: randomNumber(), matched: false },
-        { number: randomNumber(), matched: false },
-        { number: randomNumber(), matched: false },
-        { number: randomNumber(), matched: false }
+        { number:randomNumber(repeatCheck), matched: false },
+        { number:randomNumber(repeatCheck), matched: false },
+        { number:randomNumber(repeatCheck), matched: false },
+        { number:randomNumber(repeatCheck), matched: false },
+        { number:randomNumber(repeatCheck), matched: false }
     ];
-    
     showArray(bingoCard);
+    repeatCheck=[]
     play=askTurn();
     while (play) {
         turnCounter++;
-        var randomNum=randomNumber();
+        var randomNum=randomNumber(repeatCheck);
         console.log(randomNum);
         for (let i = 0; i < bingoCard.length; i++) {
             if (bingoCard[i].number==randomNum) {
                 bingoCard[i].number="X";
+                bingoCard[i].matched=true;
             }            
         }
         showArray(bingoCard);
