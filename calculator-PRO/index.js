@@ -35,88 +35,94 @@ prompt("New numbers? y/n")
 
 
 function calculatorPro(){
-    var save = [] ;
-    var buffer = [];
-    var num, ask;
-    var i = 0;
-    var j = 0;
-    args();
-       
-    quest();
-    //Insert the numbers
-    function args(){
-        num=prompt("Insert the number");
-        buffer[i]=num;
-        i++;
-        var again = prompt("more numbers? y/n");
-        switch (again){
-            case "y":
-                args();
-              break;
-            case "n":
-                save.push(sum(buffer, 0));
-                save.push(sub(buffer, 0));
-                save.push(mult(buffer, 0));
-                save.push(div(buffer, 0));
-              break;
-        }
-    }
-    // add the values
-    function sum(arr, j){
-        if (j === arr.length){
-          return 0;
-        }
-
-        return +arr[j] + +sum(arr, ++j);
-    }
-    //substract the values
-    function sub(arr, j){
-        if (j === arr.length){
-          return 0;
-        }
-
-        return +arr[j] - +sub(arr, ++j);
-    }
-    //multiply the values
-    function mult(arr, j){
-        if (j === arr.length){
-          return 1;
-        }
-
-        return +arr[j] * +mult(arr, ++j);
-    }
-    //divide the values
-    function div(arr, j){
-        if (j === arr.length){
-          return 1;
-        }
-
-
-        return +arr[j] / +div(arr, j+1);
-    }
-    //Control the decimals on the given value
-function decimals(controlDecimals) {
-  controlDecimals = controlDecimals.toFixed(3);
-  while (controlDecimals[controlDecimals.length - 1] === "0" || controlDecimals[controlDecimals.length - 1] === ".") {
-      debugger;
-      controlDecimals = controlDecimals.substring(0, controlDecimals.length - 1);
+  var save = [] ;
+  var buffer = [];
+  var num, ask;
+  var i = 0;
+  var j = 0;
+  args();
+     
+  quest();
+  //Insert the numbers
+  function args(){
+      num=prompt("Insert the number");
+      buffer[i]=num;
+      i++;
+      var again = prompt("more numbers? y/n");
+      switch (again){
+          case "y":
+              args();
+            break;
+          case "n":
+            
+              console.log(buffer.length);
+              if (buffer.length==1) {
+                debugger;
+                save.push(parseFloat(Math.sqrt(buffer[i-1])),0);
+                debugger;
+              }
+              save.push(sum(buffer, 0));
+              save.push(sub(buffer, 0));
+              save.push(mult(buffer, 0));
+              save.push(div(buffer, 0));
+            break;
+      }
   }
-  return controlDecimals;
+  // add the values
+  function sum(arr, j){
+      if (j === arr.length){
+        return 0;
+      }
+
+      return +arr[j] + +sum(arr, ++j);
+  }
+  //substract the values
+  function sub(arr, j){
+      if (j === arr.length){
+        return 0;
+      }
+
+      return +arr[j] - +sub(arr, ++j);
+  }
+  //multiply the values
+  function mult(arr, j){
+      if (j === arr.length){
+        return 1;
+      }
+
+      return +arr[j] * +mult(arr, ++j);
+  }
+  //divide the values
+  function div(arr, j){
+      if (j === arr.length){
+        return 1;
+      }
+
+
+      return +arr[j] / +div(arr, j+1);
+  }
+  //Control the decimals on the given value
+function decimals(controlDecimals) {
+controlDecimals = controlDecimals.toFixed(3);
+while (controlDecimals[controlDecimals.length - 1] === "0" || controlDecimals[controlDecimals.length - 1] === ".") {
+    controlDecimals = controlDecimals.substring(0, controlDecimals.length - 1);
 }
-    // rerun the calculatorPro() function or shows the array save
-    function quest(){
-        ask=prompt("Do you want to do more operations? y/n"); 
-        switch(ask){
-            case "y":
-                calculatorPro();
-            case "n":
-                for(var i = 0; i < save.length; i++) {
-                    console.log(decimals(save[i]));
-                }
-                return false;
-            default:
-                quest();
-        } 
-    }
+return controlDecimals;
+}
+  // rerun the calculatorPro() function or shows the array save
+  function quest(){
+      ask=prompt("Do you want to do more operations? y/n"); 
+      switch(ask){
+          case "y":
+              calculatorPro();
+          case "n":
+              for(var i = 0; i < save.length; i++) {
+                  console.log(decimals(save[i]));
+              }
+              return false;
+          default:
+              quest();
+      } 
+  }
 }
 calculatorPro()
