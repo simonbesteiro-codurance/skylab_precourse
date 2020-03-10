@@ -54,17 +54,15 @@ function calculatorPro(){
               args();
             break;
           case "n":
-            
-              console.log(buffer.length);
               if (buffer.length==1) {
-                debugger;
                 save.push(parseFloat(Math.sqrt(buffer[i-1])),0);
-                debugger;
               }
+              else{
               save.push(sum(buffer, 0));
               save.push(sub(buffer, 0));
               save.push(mult(buffer, 0));
               save.push(div(buffer, 0));
+              }
             break;
       }
   }
