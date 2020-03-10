@@ -33,43 +33,42 @@ var bingoCard = [
 ];
 
 */
-
-
+//FALTA extraer los valores del objeto
+//scores muy bajos revisar los repetidos
 
 //shows the given array
 function showArray(desiredArray) {
-    var count=0
-    
-    var outArray="";
-    var lineCounter=0;
+    var count = 0
+    var outArray = "";
+    var lineCounter = 0;
     for (let i = 0; i < desiredArray.length; i++) {
         count++;
-        if (desiredArray[i].matched==true) {
+        if (desiredArray[i].matched == true) {
             lineCounter++;
         }
-        if (lineCounter==5) {
-            if (linea==false) {
+        if (lineCounter == 5) {
+            if (linea == false) {
                 console.log("LINEA!");
-                linea=true;
-            }            
+                linea = true;
+            }
         }
-        if (count==5) {
-            count=0;
-            lineCounter=0;
-            outArray+=desiredArray[i].number+"\n";
+        if (count == 5) {
+            count = 0;
+            lineCounter = 0;
+            outArray += desiredArray[i].number + "\n";
         }
-        else{
-            outArray+=desiredArray[i].number+" ";
+        else {
+            outArray += desiredArray[i].number + " ";
         }
-        
+
     }
-    
+
     console.log(outArray);
 }
 //ask the user if he wants to continue the game
 function askTurn() {
-    //var question=prompt("Do you want with the next turn?\nYes\nNo").toUpperCase();
-    question="YES";
+    //var question = prompt("Do you want with the next turn?\nYes\nNo").toUpperCase();
+    var question="YES";
     switch (question) {
         case "YES":
             return true;
@@ -83,128 +82,134 @@ function askTurn() {
 }
 //generates a random number
 function randomNumber(repeatCheck) {
-    
-    var randomCheck =true;
+
+    var randomCheck = true;
     while (randomCheck) {
-        randomCheck=false;
+        randomCheck = false;
         var randomNumb = Math.floor((Math.random() * 100) + 1);
         for (let i = 0; i < repeatCheck.length; i++) {
-            if (randomNumb==repeatCheck[i]) {
-                randomCheck=true;
+            if (randomNumb == repeatCheck[i]) {
+                randomCheck = true;
             }
         }
-    }    
+    }
     repeatCheck.push(randomNumb);
     return randomNumb;
 }
 //check if all fields has an "X"on them
 function gameOverCheck(desiredArray) {
-    var gameOverCounter=0;
+    var gameOverCounter = 0;
     for (let i = 0; i < desiredArray.length; i++) {
-        if (desiredArray[i].number=="X") {
+        if (desiredArray[i].number == "X") {
             gameOverCounter++;
         }
     }
-    if (gameOverCounter==15) {
+    if (gameOverCounter == 15) {
         return true;
     }
 }
+//ask user if he ant to play again
 function endGame() {
+    userScore()
     var endGameCheck;
     while (!endGameCheck) {
-        endGameCheck=prompt("Want to Play Again?\nYes\nNo").toUpperCase();
+        endGameCheck = prompt("Want to Play Again?\nYes\nNo").toUpperCase();
         switch (endGameCheck) {
             case "YES":
                 return true;
 
             case "NO":
-                return false        
+                return false
             default:
                 endGame();
         }
     }
 }
+// collect the users scores
+function userScore(turnCounter,user) {
+    this.user=user;
+    this.turnCounter=turnCounter;
+}
 
 function bingo() {
     //insert the user name and save it
-    var user;
-    var turnCounter=0;
-    var play;
-    while(!user){
-    user=prompt("Welcome please insert your name");
-    }
-    var repeatCheck=[]
-    var confirmCard=true;
-    while (confirmCard) {
-    repeatCheck=[];
-    var bingoCard = [
-        { number:randomNumber(repeatCheck), matched: false },
-        { number:randomNumber(repeatCheck), matched: false },
-        { number:randomNumber(repeatCheck), matched: false },
-        { number:randomNumber(repeatCheck), matched: false },
-        { number:randomNumber(repeatCheck), matched: false },
-        //next line
-        { number:randomNumber(repeatCheck), matched: false },
-        { number:randomNumber(repeatCheck), matched: false },
-        { number:randomNumber(repeatCheck), matched: false },
-        { number:randomNumber(repeatCheck), matched: false },
-        { number:randomNumber(repeatCheck), matched: false },
-        //next line
-        { number:randomNumber(repeatCheck), matched: false },
-        { number:randomNumber(repeatCheck), matched: false },
-        { number:randomNumber(repeatCheck), matched: false },
-        { number:randomNumber(repeatCheck), matched: false },
-        { number:randomNumber(repeatCheck), matched: false }
-    ];
-    showArray(bingoCard);
-    var askUser="";
-    debugger;
-    while (askUser=="") {
-        askUser=prompt("Do you want this card?\nType yes to confirm\n other word or blank equals to NO").toUpperCase();
-        if (askUser=="YES") {
-            confirmCard=false;
-        }
-        
-    /*
-        switch (askUser) {
-            case "YES":
-                    confirmCard=false;
-                break;
-            case "NO":
-                    console.log("Redooing");
-                break;
-            default:
-                askUser="";
-        }
-        */
-    }
     
-}
-    repeatCheck=[];
-    play=askTurn();
+    var user;
+    var turnCounter = 0;
+    var play;
+    while (!user) {
+        user = prompt("Welcome, this Game has a score system which you start with 100 points and each turn cost you 1 point you will see the final score when you finish the card.\n Please insert your name");
+    }
+    var repeatCheck = []
+    var confirmCard = true;
+
+
+    while (confirmCard) {
+        repeatCheck = [];
+        var bingoCard = [
+            { number: randomNumber(repeatCheck), matched: false },
+            { number: randomNumber(repeatCheck), matched: false },
+            { number: randomNumber(repeatCheck), matched: false },
+            { number: randomNumber(repeatCheck), matched: false },
+            { number: randomNumber(repeatCheck), matched: false },
+            //next line
+            { number: randomNumber(repeatCheck), matched: false },
+            { number: randomNumber(repeatCheck), matched: false },
+            { number: randomNumber(repeatCheck), matched: false },
+            { number: randomNumber(repeatCheck), matched: false },
+            { number: randomNumber(repeatCheck), matched: false },
+            //next line
+            { number: randomNumber(repeatCheck), matched: false },
+            { number: randomNumber(repeatCheck), matched: false },
+            { number: randomNumber(repeatCheck), matched: false },
+            { number: randomNumber(repeatCheck), matched: false },
+            { number: randomNumber(repeatCheck), matched: false }
+        ];
+        showArray(bingoCard);
+        var askUser = "";
+
+        while (askUser == "") {
+            askUser = prompt("Do you want this card?\nType yes to confirm\n other word or blank equals to NO").toUpperCase();
+            if (askUser == "YES") {
+                confirmCard = false;
+            }
+
+        }
+    }
+    repeatCheck = [];
+    play = askTurn();
     while (play) {
         turnCounter++;
-        var randomNum=randomNumber(repeatCheck);
+        var randomNum = randomNumber(repeatCheck);
         console.log(randomNum);
         for (let i = 0; i < bingoCard.length; i++) {
-            if (bingoCard[i].number==randomNum) {
-                bingoCard[i].number="X";
-                bingoCard[i].matched=true;
-            }            
+            if (bingoCard[i].number == randomNum) {
+                bingoCard[i].number = "X";
+                bingoCard[i].matched = true;
+            }
         }
         showArray(bingoCard);
         if (gameOverCheck(bingoCard)) {
-            console.log("GAME OVER "+turnCounter+" turnos");
+            console.log("GAME OVER " + turnCounter + " turns, your score is: "+(100-turnCounter));
+            //userScore(turnCounter,user);
+            console.log("test");
+            debugger;
+            score.push(new userScore(turnCounter,user));
+            debugger;
+            for (let j = 0; j < score.length; j++) {
+                console.log(score[j].userScore.keys(user)+" "+100-score[j].userScore.keys(turnCounter));   
+            }
             if (endGame()) {
                 bingo();
             }
-            else{
-               break;
+            else {
+                break;
             }
         }
-            play=askTurn();
+        play = askTurn();
     }
-    console.log ("bye");
+    console.log("bye");
 }
-var linea=false;
+var score=[];
+var linea = false;
 bingo();
