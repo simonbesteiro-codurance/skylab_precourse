@@ -138,6 +138,9 @@ function bingo() {
     user=prompt("Welcome please insert your name");
     }
     var repeatCheck=[]
+    var confirmCard=true;
+    while (confirmCard) {
+    repeatCheck=[];
     var bingoCard = [
         { number:randomNumber(repeatCheck), matched: false },
         { number:randomNumber(repeatCheck), matched: false },
@@ -158,7 +161,30 @@ function bingo() {
         { number:randomNumber(repeatCheck), matched: false }
     ];
     showArray(bingoCard);
-    repeatCheck=[]
+    var askUser="";
+    debugger;
+    while (askUser=="") {
+        askUser=prompt("Do you want this card?\nType yes to confirm\n other word or blank equals to NO").toUpperCase();
+        if (askUser=="YES") {
+            confirmCard=false;
+        }
+        
+    /*
+        switch (askUser) {
+            case "YES":
+                    confirmCard=false;
+                break;
+            case "NO":
+                    console.log("Redooing");
+                break;
+            default:
+                askUser="";
+        }
+        */
+    }
+    
+}
+    repeatCheck=[];
     play=askTurn();
     while (play) {
         turnCounter++;
