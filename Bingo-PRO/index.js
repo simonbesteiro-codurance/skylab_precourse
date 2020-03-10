@@ -34,16 +34,12 @@ var bingoCard = [
 
 */
 
-//Falta todo para pro
-
-
 
 
 //shows the given array
 function showArray(desiredArray) {
-    //FALTA controlar la linea!
     var count=0
-    var linea=false;
+    
     var outArray="";
     var lineCounter=0;
     for (let i = 0; i < desiredArray.length; i++) {
@@ -198,7 +194,7 @@ function bingo() {
         }
         showArray(bingoCard);
         if (gameOverCheck(bingoCard)) {
-            console.log("GAME OVER "+turnCounter);
+            console.log("GAME OVER "+turnCounter+" turnos");
             if (endGame()) {
                 bingo();
             }
@@ -210,4 +206,5 @@ function bingo() {
     }
     console.log ("bye");
 }
+var linea=false;
 bingo();
