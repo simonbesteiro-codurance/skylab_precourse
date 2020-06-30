@@ -15,12 +15,13 @@
     
     
 }
-.display{
+#display{
     grid-column: span 4;
-    font-size: 12vh;
+    font-size: 7vh;
     text-align: right;
     background-color: darkgrey;
     color: white;
+    padding-top: 12vh;
 }
 .reverse{
   background-image: url(refresh-black-18dp.svg);
