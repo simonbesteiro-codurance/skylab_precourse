@@ -5,6 +5,13 @@
  *
  * Created at: 2020-06-30 
  */  
+/*
+FALLOS:
+Usar el queryall para trabajar sobre los elementos sin tantas variables
+controlar que no se sale de la pantalla los numeros
+MEJORAS:
+poner la operacion en la parte superior de screen y abajo el resultado
+*/
 var screen = document.getElementById("display");
 var inputCalc = screen.innerText;
 var num0 = document.getElementById("0");
@@ -151,7 +158,7 @@ function cutString (inputCalc,i) {
     sub.push(parseFloat(inputCalc.substring(i+1,inputCalc.length)));
     return sub;
 }
-//Avoids the user can set several operators NO WORKING
+//Avoids the user can set several operators 
 function checkOperators(inputCalc) {
     if (inputCalc[inputCalc.length-1] === "+" | inputCalc[inputCalc.length-1]=== "-" | inputCalc[inputCalc.length-1]=== "÷" | inputCalc[inputCalc.length-1]=== "X" | inputCalc[inputCalc.length-1]=== "," ) return true;
     else return false;

@@ -27,9 +27,7 @@
   background-image: url(refresh-black-18dp.svg);
   background-size: contain;
 }
-.smallButton{
- 
-}
+
 .largeButton{
  grid-column: span 2;
  text-align: left;
